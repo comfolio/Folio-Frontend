@@ -128,6 +128,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	line-height: 1.9em;
 }
 
+<<<<<<< HEAD
 .photos{
 	margin: 0;
 	padding: 0;
@@ -159,6 +160,8 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	border-bottom: 1px solid rgb(54, 195, 165);
 }
 
+=======
+>>>>>>> 53a631bbb768fa6713488381777d2edaa5a423c8
 footer{
 	height: 90px;
 	color: rgb(54, 195, 165);
