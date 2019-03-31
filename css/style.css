@@ -41,6 +41,12 @@ header .logo{
 	border: 1px solid rgb(54, 195, 165);
 }
 
+.img-thumbnail {
+	background-color: transparent !important;
+	border: 1px solid transparent !important;
+	border-radius: 4px;
+}
+
 .bubble:after{
 	content:'';
 	position: absolute;
