@@ -101,7 +101,7 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="panel panel-default groups">
+            <div class="panel panel-default">
               <div class="panel-heading">
                 <h3 class="panel-title">Your graph</h3>
               </div>
@@ -232,11 +232,10 @@
         .then(res => res.json())
         .then(img_b64 => {
           console.log('something')
-          $('#results-chart-full-days').attr('src', 'data:image/png;base64,' + img_b64).attr('height', '375px')
+          $('#results-chart-full-days')
+            .attr('src', 'data:image/png;base64,' + img_b64)
+            .attr('height', '300px')
         })
-    // $(document).ready(function() {
-
-    // });
     </script>
   </body>
 </html>
