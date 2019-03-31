@@ -256,16 +256,12 @@
 
     <script>
     $(document).ready(function(){
-      // var allSymbols;
-      /* fetch('http://localhost:8080/ticker-symbols')
-        .then(res => res.json())
-        .then(data => allSymbols = data); */
 
       $("#tickerSymbolInput").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         console.log(value)
 
-        fetch('https://crossorigin.me/https://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), { mode: 'cors' })
+        fetch('https://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), { mode: 'cors' })
           .then(res => {
             console.log(res)
             return res.json()
