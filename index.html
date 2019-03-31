@@ -145,7 +145,7 @@
               <div class="panel-body">
                  <div class="row">
                    <div class="col-sm-2">
-                     <a href="profile.html" class="post-avatar thumbnail"><img src="img/oshton.png" alt=""><div class="text-center">DevUser1</div></a>
+                     <a href="portfolio.html" class="post-avatar thumbnail"><img src="img/oshton.png" alt=""><div class="text-center">DevUser1</div></a>
                      <div class="likes text-center" >3 Likes</div>
                    </div>
                    <div class="col-sm-10">
@@ -272,7 +272,7 @@
         var value = $(this).val().toLowerCase();
         console.log(value)
 
-        fetch('http://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), {mode: 'cors'})
+        fetch('https://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), {mode: 'cors'})
           .then(res => res.json())
           .then(candidateSymbols => {
             $('#possibleSymbols').clear()
