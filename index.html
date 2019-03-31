@@ -266,7 +266,10 @@
         console.log(value)
 
         fetch('https://cors-anywhere.herokuapp.com/?https://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), { mode: 'cors' })
-          .then(res => res.json())
+          .then(res => {
+            console.log(res)
+            return res.json()
+          })
           .then(candidateSymbols => {
             $('#possibleSymbols').empty()
             for (var symbol of candidateSymbols)
