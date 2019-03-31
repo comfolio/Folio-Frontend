@@ -36,7 +36,7 @@ header .logo{
 	position: relative;
 	min-height: 65px;
 	padding: 15px;
-	background: rgb(54, 195, 165);
+	background: rgb(78, 78, 78);
 	border-radius: 10px;
 	border: 1px solid rgb(54, 195, 165);
 }
@@ -133,9 +133,18 @@ header .logo{
 	margin-top: 30px;
 }
 
+.thumbnail {
+	border: rgb(54, 195, 165);
+	background-color: rgb(58, 58, 58);
+}
 .profile li{
 	list-style: none;
 	line-height: 1.9em;
+}
+
+.navbar-default {
+	background-color: #F8F8F8;
+	border-color: #E7E7E7;
 }
 
 .text-center {
