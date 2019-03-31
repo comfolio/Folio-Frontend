@@ -265,7 +265,7 @@
         var value = $(this).val().toLowerCase();
         console.log(value)
 
-        fetch('https://cors-anywhere.herokuapp.com/?https://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), { mode: 'cors' })
+        fetch('https://crossorigin.me/https://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), { mode: 'cors' })
           .then(res => {
             console.log(res)
             return res.json()
