@@ -148,9 +148,46 @@
                     <div class="col-md-3"></div>
                   </div>
 
+                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="pills-30-tab" data-toggle="pill" href="#pills-30" role="tab" aria-controls="pills-30" aria-selected="true">30 days</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="pills-90-tab" data-toggle="pill" href="#pills-90" role="tab" aria-controls="pills-90" aria-selected="false">90 days</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="pills-150-tab" data-toggle="pill" href="#pills-150" role="tab" aria-controls="pills-150" aria-selected="false">150 days</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="pills-360-tab" data-toggle="pill" href="#pills-360" role="tab" aria-controls="pills-360" aria-selected="false">1 year</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="pills-full-tab" data-toggle="pill" href="#pills-full" role="tab" aria-controls="pills-full" aria-selected="false">Full</a>
+                    </li>
+                  </ul>
+
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade active" id="pills-30" role="tabpanel" aria-labelledby="pills-30-tab">
+                      <img id="results-chart-30-days">
+                    </div>
+                    <div class="tab-pane fade" id="pills-90" role="tabpanel" aria-labelledby="pills-90-tab">
+                      <img id="results-chart-90-days">
+                    </div>
+                    <div class="tab-pane fade" id="pills-150" role="tabpanel" aria-labelledby="pills-150-tab">
+                      <img id="results-chart-150-days">
+                    </div>
+                    <div class="tab-pane fade" id="pills-360" role="tabpanel" aria-labelledby="pills-360-tab">
+                      <img id="results-chart-360-days">
+                    </div>
+                    <div class="tab-pane fade" id="pills-full" role="tabpanel" aria-labelledby="pills-full-tab">
+                      <img id="results-chart-full-days">
+                    </div>
+                  </div>
+
+                  <img id="results-chart-raspberry-pie">
+
                   <button class="btn btn-default btn-primary" type="button" id="submit2backend">Submit</button>
 
-                  <img id="results-chart" type="button">
                 </form>
               </div>
             </div>
@@ -327,11 +364,23 @@
       });
 
       $('#submit2backend').on('click', function(e) {
-        fetch('https://dd779d0c.ngrok.io/generate-graph?params=' + JSON.stringify(tickerStore), { mode: 'cors' })
+        console.log('Retrieving graphs...')
+        let start_epoch = +new Date($('#port-start-date').val());
+        console.log(start_epoch)
+        fetch('https://dd779d0c.ngrok.io/generate-graph?epoch=' + start_epoch + '&params=' + JSON.stringify(tickerStore), { mode: 'cors' })
+          .then(res => res.json())
+          .then(img_b64_array => {
+            $('#results-chart-30-days').attr('src', 'data:image/png;base64,' + img_b64_array['30-days']).attr('height', '200px')
+            $('#results-chart-90-days').attr('src', 'data:image/png;base64,' + img_b64_array['90-days']).attr('height', '200px')
+            $('#results-chart-150-days').attr('src', 'data:image/png;base64,' + img_b64_array['150-days']).attr('height', '200px')
+            $('#results-chart-360-days').attr('src', 'data:image/png;base64,' + img_b64_array['360-days']).attr('height', '200px')
+            $('#results-chart-full-days').attr('src', 'data:image/png;base64,' + img_b64_array['full-days']).attr('height', '200px')
+          })
+          .then(() => fetch('https://dd779d0c.ngrok.io/generate-pie?&params=' + JSON.stringify(tickerStore), { mode: 'cors' }))
           .then(res => res.json())
           .then(img_b64 => {
-            $('#results-chart').attr('src', 'data:image/png;base64,' + img_b64)
-          });
+            $('#results-chart-raspberry-pie').attr('src', 'data:image/png;base64,' + img_b64).attr('height', '200px')
+          })
       })
     });
     </script>
