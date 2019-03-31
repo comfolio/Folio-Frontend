@@ -105,19 +105,19 @@
               <div class="panel-heading">
                 <h3 class="panel-title">Publish your portfolio analysis!</h3>
               </div>
+
               <div class="panel-body">
                 <form>
                   <div class="form-group">
                     <h4 class="white-text">When does your portfolio start?</h4>
 
-                    <!-- <input type="text" id="port-start-date" class="form-control"> -->
                     <div class="input-group date">
                       <input type="text" class="form-control" id="port-start-date"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                     </div>
 
                     <h4 class="white-text">Add a ticker from NYSE or NASDAQ...</h4>
                     <div class="row">
-                      <div class="col-md-10" style="padding-right: 0px">
+                      <div class="col-md-9" style="padding-right: 0px">
                         <div class="dropdown">
                           <input id="tickerSymbolInput" type="text" class="form-control" placeholder="Search..." data-toggle="dropdown" autocomplete="off">
                           <ul class="dropdown-menu" id="possibleSymbols"></ul>
@@ -125,12 +125,69 @@
                       </div>
 
                       <div class="col-md-1" style="padding-left: 0px">
-                        <button class="btn btn-primary dropdown-toggle" type="button" >Add...</button>
+                        <button class="btn btn-primary dropdown-toggle" id="addTickerSymbol" type="button">Add</button>
+                      </div>
+
+                      <div class="col-md-1" style="padding-left: 0px">
+                        <button class="btn btn-primary dropdown-toggle" id="clearAllTickerSymbol" type="button">Clear all!</button>
                       </div>
 
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-default btn btn-primary">Submit</button>
+
+                  <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                      <table class="table" id="tickerTable" style="width: 100%; color: #AAAAAA">
+                        <tr>
+                          <th>Company</th>
+                          <th class="text-right">Portion</th>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="col-md-3"></div>
+                  </div>
+
+                  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="pills-30-tab" data-toggle="pill" href="#pills-30" role="tab" aria-controls="pills-30" aria-selected="true">30 days</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="pills-90-tab" data-toggle="pill" href="#pills-90" role="tab" aria-controls="pills-90" aria-selected="false">90 days</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="pills-150-tab" data-toggle="pill" href="#pills-150" role="tab" aria-controls="pills-150" aria-selected="false">150 days</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="pills-360-tab" data-toggle="pill" href="#pills-360" role="tab" aria-controls="pills-360" aria-selected="false">1 year</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="pills-full-tab" data-toggle="pill" href="#pills-full" role="tab" aria-controls="pills-full" aria-selected="false">Full</a>
+                    </li>
+                  </ul>
+
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade active" id="pills-30" role="tabpanel" aria-labelledby="pills-30-tab">
+                      <img id="results-chart-30-days">
+                    </div>
+                    <div class="tab-pane fade" id="pills-90" role="tabpanel" aria-labelledby="pills-90-tab">
+                      <img id="results-chart-90-days">
+                    </div>
+                    <div class="tab-pane fade" id="pills-150" role="tabpanel" aria-labelledby="pills-150-tab">
+                      <img id="results-chart-150-days">
+                    </div>
+                    <div class="tab-pane fade" id="pills-360" role="tabpanel" aria-labelledby="pills-360-tab">
+                      <img id="results-chart-360-days">
+                    </div>
+                    <div class="tab-pane fade" id="pills-full" role="tabpanel" aria-labelledby="pills-full-tab">
+                      <img id="results-chart-full-days">
+                    </div>
+                  </div>
+
+                  <img id="results-chart-raspberry-pie">
+
+                  <button class="btn btn-default btn-primary" type="button" id="submit2backend">Submit</button>
+
                 </form>
               </div>
             </div>
@@ -255,23 +312,76 @@
     });</script>
 
     <script>
-    $(document).ready(function(){
+    var tickerStore = {}
 
+    function tickerValueChange(symbol) {
+      var value = $('#ticker' + symbol).val();
+      if (value) {
+        tickerStore[symbol] = parseInt(value);
+        console.log(tickerStore)
+      }
+    }
+
+    function renderTable() {
+      $('#tickerTable').empty()
+      $('#tickerTable').append('<tr><th>Company</th><th class="text-right">Portion</th></tr>')
+      for (var symbol of Object.keys(tickerStore)) {
+        $('#tickerTable').append('<tr><th>' + symbol + '</th><th class="text-right"><input type="text" step="1" min="0" max="100" id="ticker' + symbol + '" onchange="tickerValueChange(\'' + symbol + '\')" value="' + tickerStore[symbol] + '"></th></tr>')
+      }
+    }
+
+    function addSymbolToList(symbol) {
+        if (symbol != '' && !tickerStore.hasOwnProperty(symbol)) {
+          tickerStore[symbol] = 100 / (Object.keys(tickerStore).length + 2)
+          console.log(tickerStore)
+          renderTable()
+        }
+      }
+
+    $(document).ready(function(){
       $("#tickerSymbolInput").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         console.log(value)
 
         fetch('https://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), { mode: 'cors' })
-          .then(res => {
-            console.log(res)
-            return res.json()
-          })
+          .then(res => res.json())
           .then(candidateSymbols => {
             $('#possibleSymbols').empty()
             for (var symbol of candidateSymbols)
-              $('#possibleSymbols').append('<li><a href="#">' + symbol + '</a></li>');
+              $('#possibleSymbols').append('<li><a onclick="addSymbolToList(\'' + symbol + '\')">' + symbol + '</a></li>');
           });
       });
+
+      $('#clearAllTickerSymbol').on('click', function() {
+        tickerStore = {}
+        renderTable()
+      })
+
+      $('#addTickerSymbol').on('click', function() {
+        var symbol = $("#tickerSymbolInput").val().trim()
+        addSymbolToList(symbol)
+        $("#tickerSymbolInput").val('')
+      });
+
+      $('#submit2backend').on('click', function(e) {
+        console.log('Retrieving graphs...')
+        let start_epoch = +new Date($('#port-start-date').val());
+        console.log(start_epoch)
+        fetch('https://dd779d0c.ngrok.io/generate-graph?epoch=' + start_epoch + '&params=' + JSON.stringify(tickerStore), { mode: 'cors' })
+          .then(res => res.json())
+          .then(img_b64_array => {
+            $('#results-chart-30-days').attr('src', 'data:image/png;base64,' + img_b64_array['30-days']).attr('height', '200px')
+            $('#results-chart-90-days').attr('src', 'data:image/png;base64,' + img_b64_array['90-days']).attr('height', '200px')
+            $('#results-chart-150-days').attr('src', 'data:image/png;base64,' + img_b64_array['150-days']).attr('height', '200px')
+            $('#results-chart-360-days').attr('src', 'data:image/png;base64,' + img_b64_array['360-days']).attr('height', '200px')
+            $('#results-chart-full-days').attr('src', 'data:image/png;base64,' + img_b64_array['full-days']).attr('height', '200px')
+          })
+          .then(() => fetch('https://dd779d0c.ngrok.io/generate-pie?&params=' + JSON.stringify(tickerStore), { mode: 'cors' }))
+          .then(res => res.json())
+          .then(img_b64 => {
+            $('#results-chart-raspberry-pie').attr('src', 'data:image/png;base64,' + img_b64).attr('height', '200px')
+          })
+      })
     });
     </script>
   </body>
