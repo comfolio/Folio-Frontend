@@ -18,10 +18,15 @@ header .logo{
 	float:left;
 }
 
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+	border-color: rgb(78, 78, 78) !important;
+}
+
 .panel {
 	background-color: rgb(78, 78, 78) !important;
 	border-color: rgb(36, 39, 38) !important;
 }
+
 
 .panel-heading{
 		background-color: rgb(54, 195, 165) !important;
@@ -32,9 +37,9 @@ header .logo{
 	position: relative;
 	min-height: 65px;
 	padding: 15px;
-	background: #fff;
+	background: rgb(54, 195, 165);
 	border-radius: 10px;
-	border: 1px solid #ccc;
+	border: 1px solid rgb(54, 195, 165);
 }
 
 .bubble:after{
@@ -56,7 +61,7 @@ header .logo{
 	position: absolute;
 	border-style: solid;
 	border-width: 15px 15px 15px 0;
-	border-color: transparent #ccc;
+	border-color: transparent rgb(54, 195, 165);
 	display: block;
 	width: 0;
 	z-index: 0;
@@ -78,7 +83,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 .comment{
-	border: 1px solid #ccc;
+	border: 1px solid rgb(54, 195, 165);
 	border-radius: 5px;
 	padding: 3px;
 	margin: 5px 0;
