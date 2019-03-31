@@ -272,7 +272,8 @@
         var value = $(this).val().toLowerCase();
         console.log(value)
 
-        fetch('https://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), {mode: 'cors'})
+        fetch('https://cors-anywhere.herokuapp.com/?https://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), { mode: 'cors' })
+          .then(console.log)
           .then(res => res.json())
           .then(candidateSymbols => {
             $('#possibleSymbols').clear()
