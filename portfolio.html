@@ -21,27 +21,27 @@
 
   <body>
 
-  <header>
-    <div class="container">
-      <img src="img/logo.png" class="logo" alt="">
-      <form class="form-inline">
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputEmail3">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-          <label class="sr-only" for="exampleInputPassword3">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-default">Sign in</button><br>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox"> Remember me
-          </label>
-        </div>
-      </form>
-    </div>
-  </header>
+    <header>
+      <div class="container">
+        <img src="img/logo.png" class="logo" alt="">
+        <form class="form-inline" style="padding-top: 20px">
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail3">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputPassword3">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-default">Sign in</button><br>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Remember me
+            </label>
+          </div>
+        </form>
+      </div>
+    </header>
 
     <nav class="navbar navbar-default">
       <div class="container">
@@ -55,9 +55,9 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="leaderboard.html">Leaderboard</a></li>
-            <li><a href="portfolio.html">View/Edit Portfolio</a></li>
+            <li class="active"><a href="portfolio.html">View/Edit Portfolio</a></li>
           </ul>
         </div>
       </div>
@@ -171,7 +171,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.4.4/fuse.min.js"></script>
   </body>
 </html>
