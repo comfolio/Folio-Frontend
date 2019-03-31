@@ -1,6 +1,5 @@
 header{
-	/* background-color: rgb(54, 195, 165); */
-	background-color: rgb(195, 54, 54); 
+	background-color: rgb(54, 195, 165);
 	color:#fff;
 	min-height: 100px;
 	padding-top: 10px;
@@ -16,6 +15,11 @@ header form{
 
 header .logo{
 	float:left;
+}
+
+.panel {
+	background-color: rgb(78, 78, 78) !important;
+	border-color: rgb(36, 39, 38) !important;
 }
 
 .panel-heading{
@@ -91,7 +95,7 @@ header .logo{
 	list-style: none;
 	padding:0 5px;
 	display:inline;
-	float:left;
+	float: left;
 }
 
 .friends img{
@@ -136,15 +140,34 @@ header .logo{
 	width:100%;
 }
 
+.text-center {
+	color: white !important;
+}
+
 footer{
-	background: #f4f4f4;
 	height: 90px;
-	color: #04519b;
+	color: rgb(54, 195, 165);
 	font-weight: bold;
 	text-align: center;
-	padding-top: 40px;
-	margin-top: 30px;
-	border-top: 7px solid #04519b;
+	padding-top: 35px;
+	margin-top: 10px;
+	background: rgb(36, 39, 38) !important;
+	border-top: 2px solid rgb(54, 195, 165);
+}
+
+a {
+	color: rgb(54, 195, 165) !important;
+}
+
+.btn-primary {
+	color: rgb(54, 195, 165) !important;
+	background-color: rgb(58, 58, 58) !important;
+	border-color: rgb(58, 58, 58) !important;
+}
+
+.btn-primary:hover {
+	background-color: rgb(43, 43, 43) !important;
+	border-color: rgb(43, 43, 43) !important;
 }
 
 .members .member-row{
