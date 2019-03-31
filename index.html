@@ -276,7 +276,7 @@
           .then(console.log)
           .then(res => res.json())
           .then(candidateSymbols => {
-            $('#possibleSymbols').clear()
+            $('#possibleSymbols').empty()
             for (var symbol of candidateSymbols)
               $('#possibleSymbols').append('<li><a href="#">' + symbol + '</a></li>');
           });
