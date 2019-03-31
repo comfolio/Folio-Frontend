@@ -27,6 +27,7 @@ header .logo{
 }
 
 
+
 .panel-heading{
 		background-color: rgb(54, 195, 165) !important;
     color: #fff !important;
@@ -175,6 +176,12 @@ footer{
 
 a {
 	color: rgb(54, 195, 165) !important;
+}
+
+.btn-default {
+	background-color: rgb(58, 58, 58); 
+	border: rgb(58, 58, 58);
+	color: rgb(54, 195, 165);
 }
 
 .btn-primary {
