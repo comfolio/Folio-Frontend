@@ -7,7 +7,6 @@ header{
 
 body{
 	background-color: rgb(36, 39, 38);
-	color: #FFFFFF
 }
 
 header form{
@@ -73,7 +72,7 @@ header .logo{
 	width: 90%;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+.white-text {
 	color: white;
 }
 
