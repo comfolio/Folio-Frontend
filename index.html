@@ -120,14 +120,7 @@
                       <div class="col-md-10" style="padding-right: 0px">
                         <div class="dropdown">
                           <input id="tickerSymbolInput" type="text" class="form-control" placeholder="Search..." data-toggle="dropdown" autocomplete="off">
-                          <ul class="dropdown-menu" id="possibleSymbols">
-                            <li><a href="#">HTML</a></li>
-                            <li><a href="#">CSS</a></li>
-                            <li><a href="#">JavaScript</a></li>
-                            <li><a href="#">jQuery</a></li>
-                            <li><a href="#">Bootstrap</a></li>
-                            <li><a href="#">Angular</a></li>
-                          </ul>
+                          <ul class="dropdown-menu" id="possibleSymbols"></ul>
                         </div>
                       </div>
 
@@ -273,7 +266,6 @@
         console.log(value)
 
         fetch('https://cors-anywhere.herokuapp.com/?https://dd779d0c.ngrok.io/ticker-symbol-search?' + $.param({ symbol: value, limit: 5}), { mode: 'cors' })
-          .then(console.log)
           .then(res => res.json())
           .then(candidateSymbols => {
             $('#possibleSymbols').empty()
